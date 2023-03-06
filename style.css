@@ -1,0 +1,161 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 12000px;
+    position: relative;
+}
+
+.welcome-container {
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+#about {
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    animation-duration: 1;
+}
+
+#about p {
+    animation-name: appear;
+    animation-duration: 4s;
+}
+
+h1 {
+    width: 300px;
+    text-align: center;
+    font-family: Josefin;
+    font-weight: 500;
+    font-size: xx-large;
+    z-index: 1;
+    color: white;
+    animation-name: appear;
+    animation-duration: 800ms;
+}
+
+#name, #portfolio, #about {
+    display: none;
+}
+
+h1 p {
+    font-family: BadScript;
+    font-weight: normal;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes disappear {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+#scroll-down {
+    position: fixed;
+    bottom: 100px;
+    left: calc(50% - 12px);
+    scale: 2;
+    animation-name: scrolldown;
+    animation-duration: 4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    color: white;
+    z-index: 1;
+}
+
+@keyframes scrolldown {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    33% {
+        transform: translateY(-50px);
+        opacity: 1;
+    }
+    66% {
+        transform: translateY(25px);
+        opacity: 0;
+    }
+    67% {
+        transform: translateY(-75px);
+        opacity: 0;
+    }
+}
+
+body::before {
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    display: block;
+    content: '';
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+@media (orientation: portrait) and (min-width: 721px) {
+    body::before {
+        background-image: url('./images/BGSR-1060.png')
+    }
+}
+@media (orientation: portrait) and (max-width: 720x) and (min-width: 481px) {
+    body::before {
+        background-image: url('./images/BGSR-720.png')
+    }
+}
+@media (orientation: portrait) and (max-width: 480px) {
+    body::before {
+        background-image: url('./images/BGSR-480.png')
+    }
+}
+
+@media (orientation: landscape) and (min-height: 721px) {
+    body::before {
+        background-image: url('./images/BGS-1060.png')
+    }
+}
+@media (orientation: landscape) and (max-height: 720px) and (min-height: 481px) {
+    body::before {
+        background-image: url('./images/BGS-720.png')
+    }
+}
+@media (orientation: landscape) and (max-height: 480px) {
+    body::before {
+        background-image: url('./images/BGS-480.png')
+    }
+}
+
+@font-face {
+    font-family: Josefin;
+    src: url('./fonts/JosefinSans-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: BadScript;
+    src: url('./fonts/BadScript-Regular.ttf');
+}
