@@ -9,59 +9,56 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-    <div class="welcome-container">
+    <div id="welcome-container">
         <h1 class="welcome" id="hello">Hello</h1>
         <h1 class="welcome" id="name">I'm<br><p>Ahmed Rakin Kamal</p></h1>
         <h1 class="welcome" id="portfolio">This is my online portfolio</p></h1>
-        <div id="about">
-            <p>I am Mathematician</p>
-        </div>
         <span class="material-symbols-outlined" id="scroll-down">
             keyboard_double_arrow_down
         </span>
     </div>
+    <div id="about">
+        <p>Me Math</p>
+    </div>
     <script>
+        const appearDuration = 2000
+        const disappearDuration = 1000
+        const appear = 'appear ' + appearDuration + 'ms'
+        const disappear = 'disappear ' + disappearDuration + 'ms'
+        let intDiv = (a, b) => parseInt(a / b)
         let welcome = [
             document.querySelector('.welcome#hello'),
             document.querySelector('.welcome#name'),
             document.querySelector('.welcome#portfolio'),
-            document.querySelector('#about')
         ]
-        let currentWelcome = 0
-        const scrollInterval = 3000
+        let welcomeContainer = document.querySelector('#welcome-container')
+        let about = document.querySelector('#about')
+        let currentSection = 0
         document.addEventListener('scroll', event => {
-            if (parseInt(window.scrollY / scrollInterval) != currentWelcome) {
-                let newWelcome = parseInt(window.scrollY / scrollInterval)
-                if (currentWelcome < 3 && newWelcome < 3) {
-                    welcome[currentWelcome].style.animationName = 'disappear'
-                    welcome[currentWelcome].style.opacity = '0'
-                    let toBeRemoved = welcome[currentWelcome]
-                    setTimeout(() => {
-                        toBeRemoved.style.setProperty("display", 'none')
-                    }, 800)
-                    setTimeout(() => {
-                        welcome[newWelcome].style.animationName = 'appear'
-                        welcome[newWelcome].style.display = 'block'
-                        welcome[newWelcome].style.opacity = '1'
-                    }, 800)
+            let newSection = intDiv(window.scrollY, innerHeight)
+            if (newSection != currentSection) {
+                if (newSection < 3 && currentSection < 3) {
+                    welcome[currentSection].style.opacity = '0'
+                    welcome[currentSection].style.animation = 'disappearUp 1s'
+                    welcome[newSection].style.opacity = '1'
+                    welcome[newSection].style.animation = 'appearUp 2s'
                 }
-                if (newWelcome == 3 && currentWelcome == 2) {
-                    welcome[2].style.display = 'none'
-                    welcome[2].style.animationName = 'none'
-                    welcome[3].style.display = 'block'
+                if (newSection >= 3 && currentSection < 3) {
+                    welcomeContainer.style.opacity = '0'
+                    welcomeContainer.style.animation = 'disappearFixed 2s'
+                    welcome[currentSection].style.animation = 'disappearZoom 2s'
+                    about.style.opacity = '1'
+                    about.style.animation = 'appearFixed, 4s'
                 }
-                if (newWelcome == 2 && currentWelcome == 3) {
-                    welcome[2].style.display = 'block'
-                    welcome[2].style.animationName = 'none'
-                    welcome[3].style.display = 'none'
+                if (newSection < 3 && currentSection >= 3) {
+                    about.style.opacity = '0'
+                    about.style.animation = 'disappearFixed 2s'
+                    welcomeContainer.style.opacity = '1'
+                    welcomeContainer.style.animation = 'appearFixed 4s'
+                    welcome[newSection].style.opacity = '1'
+                    welcome[newSection].style.animation = 'appearZoom 4s'
                 }
-                currentWelcome = newWelcome
-            }
-            if (currentWelcome == 2) {
-                let extent = (window.scrollY % scrollInterval) / scrollInterval
-                extent = Math.max(0, (extent - 0.5) * 2)
-                welcome[currentWelcome].style.backgroundColor = `rgba(255, 255, 255, ${extent})`
-                welcome[currentWelcome].style.scale = (1 + (99 * extent)).toString()
+                currentSection = newSection
             }
         })
     </script>

@@ -4,71 +4,47 @@
 }
 
 body {
-    height: 12000px;
-    position: relative;
+    height: 400vh;
 }
 
-.welcome-container {
+#welcome-container {
+    --block: 'flex';
     display: flex;
     position: fixed;
     justify-content: center;
     align-items: center;
     height: 100vh;
     width: 100%;
+    background-size: cover;
+    background-position: center;
 }
 
 #about {
-    width: 100vw;
-    height: 100vh;
-    background-color: white;
-    animation-duration: 1;
+    position: fixed;
+}
+
+#name, #portfolio, #about {
+    opacity: 0;
 }
 
 #about p {
-    animation-name: appear;
-    animation-duration: 4s;
 }
 
 h1 {
     width: 300px;
+    position: absolute;
     text-align: center;
     font-family: Josefin;
     font-weight: 500;
     font-size: xx-large;
     z-index: 1;
     color: white;
-    animation-name: appear;
-    animation-duration: 800ms;
-}
-
-#name, #portfolio, #about {
-    display: none;
+    --block: block;
 }
 
 h1 p {
     font-family: BadScript;
     font-weight: normal;
-}
-
-@keyframes appear {
-    0% {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes disappear {
-    0% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
 }
 
 #scroll-down {
@@ -82,6 +58,74 @@ h1 p {
     animation-iteration-count: infinite;
     color: white;
     z-index: 1;
+}
+
+@keyframes appearZoom {
+    0% {
+        scale: 100;
+    }
+    50% {
+        scale: 100;
+    }
+    100% {
+        scale: 1;
+    }
+}
+
+@keyframes disappearZoom {
+    0% {
+        scale: 1;
+    }
+    100% {
+        scale: 100;
+    }
+}
+
+@keyframes appearFixed {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes disappearFixed {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes appearUp {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    50% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes disappearUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
 }
 
 @keyframes scrolldown {
@@ -103,49 +147,34 @@ h1 p {
     }
 }
 
-body::before {
-    position: fixed;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    display: block;
-    content: '';
-    display: block;
-    width: 100vw;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
 @media (orientation: portrait) and (min-width: 721px) {
-    body::before {
+    #welcome-container {
         background-image: url('./images/BGSR-1060.png')
     }
 }
 @media (orientation: portrait) and (max-width: 720x) and (min-width: 481px) {
-    body::before {
+    #welcome-container {
         background-image: url('./images/BGSR-720.png')
     }
 }
 @media (orientation: portrait) and (max-width: 480px) {
-    body::before {
+    #welcome-container {
         background-image: url('./images/BGSR-480.png')
     }
 }
 
 @media (orientation: landscape) and (min-height: 721px) {
-    body::before {
+    #welcome-container {
         background-image: url('./images/BGS-1060.png')
     }
 }
 @media (orientation: landscape) and (max-height: 720px) and (min-height: 481px) {
-    body::before {
+    #welcome-container {
         background-image: url('./images/BGS-720.png')
     }
 }
 @media (orientation: landscape) and (max-height: 480px) {
-    body::before {
+    #welcome-container {
         background-image: url('./images/BGS-480.png')
     }
 }
