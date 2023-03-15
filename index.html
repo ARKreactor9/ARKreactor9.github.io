@@ -1,66 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-</head>
-<body>
-    <div id="welcome-container">
-        <h1 class="welcome" id="hello">Hello</h1>
-        <h1 class="welcome" id="name">I'm<br><p>Ahmed Rakin Kamal</p></h1>
-        <h1 class="welcome" id="portfolio">This is my online portfolio</p></h1>
-        <span class="material-symbols-outlined" id="scroll-down">
-            keyboard_double_arrow_down
-        </span>
-    </div>
-    <div id="about">
-        <p>Me Math</p>
-    </div>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script>
-        const appearDuration = 2000
-        const disappearDuration = 1000
-        const appear = 'appear ' + appearDuration + 'ms'
-        const disappear = 'disappear ' + disappearDuration + 'ms'
-        let intDiv = (a, b) => parseInt(a / b)
-        let welcome = [
-            document.querySelector('.welcome#hello'),
-            document.querySelector('.welcome#name'),
-            document.querySelector('.welcome#portfolio'),
-        ]
-        let welcomeContainer = document.querySelector('#welcome-container')
-        let about = document.querySelector('#about')
-        let currentSection = 0
-        document.addEventListener('scroll', event => {
-            let newSection = intDiv(window.scrollY, innerHeight)
-            if (newSection != currentSection) {
-                if (newSection < 3 && currentSection < 3) {
-                    welcome[currentSection].style.opacity = '0'
-                    welcome[currentSection].style.animation = 'disappearUp 1s'
-                    welcome[newSection].style.opacity = '1'
-                    welcome[newSection].style.animation = 'appearUp 2s'
+        document.addEventListener('DOMContentLoaded', () => {
+            let [operatorB, operatorA] = document.querySelectorAll('.operate')
+            operatorA.canClick = true
+            operatorB.canClick = false
+            let operating = false
+            let elements = document.querySelectorAll('.element')
+            for (let element of elements) {
+                if (element.innerHTML == '0') {
+                    element.style.fontWeight = '200'
                 }
-                if (newSection >= 3 && currentSection < 3) {
-                    welcomeContainer.style.opacity = '0'
-                    welcomeContainer.style.animation = 'disappearFixed 2s'
-                    welcome[currentSection].style.animation = 'disappearZoom 2s'
-                    about.style.opacity = '1'
-                    about.style.animation = 'appearFixed, 4s'
-                }
-                if (newSection < 3 && currentSection >= 3) {
-                    about.style.opacity = '0'
-                    about.style.animation = 'disappearFixed 2s'
-                    welcomeContainer.style.opacity = '1'
-                    welcomeContainer.style.animation = 'appearFixed 4s'
-                    welcome[newSection].style.opacity = '1'
-                    welcome[newSection].style.animation = 'appearZoom 4s'
-                }
-                currentSection = newSection
             }
+            let matrix = document.querySelector('#matrix')
+            operatorA.addEventListener('click', () => {
+                if (!operatorA.canClick) {
+                    return
+                }
+                if (operatorA.innerHTML == '× <span class="operator">A</span>') {
+                    operatorA.style.animation = 'disappear 2s'
+                    operatorA.canClick = false
+                    operatorB.canClick = false
+                    setTimeout(() => {
+                        operatorA.canClick = true
+                        operatorB.canClick = true
+                        operatorB.canClick = true
+                        operatorB.style.opacity = '1'
+                        operatorB.style.animation = 'appear 1s'
+                        operatorB.style.cursor = 'pointer'
+                        operatorA.innerHTML = '× <span class="operator">A<sup>-1</sup></span>'
+                        operatorA.style.animation = 'appear 3s'
+                        if (elements[12].style.cursor != 'pointer') {
+                            setTimeout(() => {
+                                operatorB.style.animation = 'clickme 4s infinite'
+                            }, 1000)
+                        }
+                    }, 2000)
+                    let newMatrix = 'I0000am000AhmedRakinKamal'
+                    for (let i = 0; i < 25; i++) {
+                        setTimeout(() => {
+                            elements[i].innerHTML = newMatrix[i]
+                            if (newMatrix[i] == '0') {
+                                elements[i].style.fontWeight = '200'
+                            } else {
+                                elements[i].style.fontWeight = '900'
+                            }
+                        }, Math.random() * 2000)
+                    }
+                } else {
+                    operatorA.canClick = false
+                    operatorB.canClick = false
+                    operatorA.style.animation = 'disappear 2s'
+                    operatorB.style.opacity = '0'
+                    operatorB.style.animation = 'disappear 2s'
+                    operatorB.canClick = false
+                    operatorB.style.cursor = 'auto'
+                    setTimeout(() => {
+                        operatorA.canClick = true
+                        operatorA.innerHTML = '× <span class="operator">A</span>'
+                        operatorA.style.animation = 'appear 1s'
+                        setTimeout(() => {
+
+                            if (elements[12].style.cursor != 'pointer') {
+                                operatorA.style.animation = 'clickme 4s infinite'
+                            }
+                        }, 1000)
+                    }, 2000)
+                    let newMatrix = 'H00000E00000L00000L00000O'
+                    for (let i = 0; i < 25; i++) {
+                        setTimeout(() => {
+                            elements[i].innerHTML = newMatrix[i]
+                            if (newMatrix[i] == '0') {
+                                elements[i].style.fontWeight = '200'
+                            } else {
+                                elements[i].style.fontWeight = '900'
+                            }
+                        }, Math.random() * 2000)
+                    }
+                }
+            })
+            operatorB.addEventListener('click', () => {
+                if (!operatorB.canClick) {
+                    return
+                }
+                if (operatorB.innerHTML == '<span class="operator">B</span> ×') {
+                    operatorA.canClick = false
+                    operatorB.canClick = false
+                    operatorB.style.animation = 'disappear 2s'
+                    operatorA.style.opacity = '0'
+                    operatorA.style.cursor = 'auto'
+                    operatorA.style.animation = 'disappear 2s'
+                    setTimeout(() => {
+                        operatorB.innerHTML = '<span class="operator">B<sup>-1</sup></span> ×'
+                        operatorB.canClick = true
+                        operatorB.style.animation = 'appear 3s'
+                        elements[12].style.animation = 'clickme 3s infinite'
+                        elements[12].style.cursor = 'pointer'
+                        elements[12].addEventListener('click', () => {
+                            matrix.style.width = '100vw'
+                            matrix.style.height = '100vh'
+                            matrix.style.gridTemplateColumns = '20% 20% 20% 20% 20%'
+                            matrix.style.gridTemplateRows = '20% 20% 20% 20% 20%'
+                            operatorA.style.display = 'none'
+                            operatorB.style.display = 'none'
+                        })
+
+                    }, 2000)
+                    let newMatrix = '00000T000Sh00WiiimeTssybe'
+                    for (let i = 0; i < 25; i++) {
+                        setTimeout(() => {
+                            elements[i].innerHTML = newMatrix[i]
+                            if (newMatrix[i] == '0') {
+                                elements[i].style.fontWeight = '200'
+                            } else {
+                                elements[i].style.fontWeight = '900'
+                            }
+                        }, Math.random() * 2000)
+                    }
+                } else {
+                    operatorA.canClick = false
+                    operatorB.canClick = false
+                    operatorB.style.animation = 'disappear 2s'
+                    setTimeout(() => {
+                        operatorB.canClick = true
+                        operatorA.canClick = true
+                        operatorB.innerHTML = '<span class="operator">B</span> ×'
+                        operatorA.style.animation = 'appear 3s'
+                        operatorA.style.cursor = 'pointer'
+                        operatorA.style.opacity = '1'
+                        operatorB.style.animation = 'appear 1s'
+                        setTimeout(() => {
+
+                            if (elements[12].style.cursor != 'pointer') {
+                                operatorB.style.animation = 'clickme 4s infinite'
+                            }
+                        }, 1000)
+                    }, 2000)
+                    let newMatrix = 'I0000am000AhmedRakinKamal'
+                    for (let i = 0; i < 25; i++) {
+                        setTimeout(() => {
+                            operatorA.canClick = true
+                            operatorB.canClick = true
+                            elements[i].innerHTML = newMatrix[i]
+                            if (newMatrix[i] == '0') {
+                                elements[i].style.fontWeight = '200'
+                            } else {
+                                elements[i].style.fontWeight = '900'
+                            }
+                        }, Math.random() * 2000)
+                    }
+                }
+            })
         })
     </script>
+</head>
+
+<body>
+    <p class="operate"><span class="operator">B</span> ×</p>
+    <div id="matrix">
+        <div class="element">H</div>
+        <div class="element">0</div>
+        <div class="element">0</div>
+        <div class="element">0</div>
+        <div class="element">0</div>
+        <div class="element">0</div>
+        <div class="element">E</div>
+        <div class="element">0</div>
+        <div class="element">0</div>
+        <div class="element">0</div>
+        <div class="element">0</div>
+        <div class="element">0</div>
+        <div class="element">L</div>
+        <div class="element">0</div>
+        <div class="element">0</div>
+        <div class="element">0</div>
+        <div class="element">0</div>
+        <div class="element">0</div>
+        <div class="element">L</div>
+        <div class="element">0</div>
+        <div class="element">0</div>
+        <div class="element">0</div>
+        <div class="element">0</div>
+        <div class="element">0</div>
+        <div class="element">O</div>
+    </div>
+    <p class="operate">× <span class="operator">A</span></p>
 </body>
+
 </html>
