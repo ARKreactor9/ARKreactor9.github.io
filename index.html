@@ -16,9 +16,29 @@
             operatorB.canClick = false
             let operating = false
             let elements = document.querySelectorAll('.element')
-            for (let element of elements) {
-                if (element.innerHTML == '0') {
-                    element.style.fontWeight = '200'
+            let colors = ['#0678ff', '#ff1f1d', '#ff2a00', '#00f6ff', '#27b920', '#f61f9f']
+            function paintZero(i) {
+                elements[i].style.fontWeight = '500'
+                let color = colors[parseInt(Math.random() * colors.length)]
+                elements[i].style.color = color
+                elements[i].style.textShadow = `1px 1px ${color}`
+                elements[i].style.fontFamily = 'Tangerine'
+                elements[i].style.cursor = 'auto'
+                elements[i].style.animation = 'none'
+            }
+            function paintLetter(i) {
+                elements[i].style.color = 'white'
+                elements[i].style.fontWeight = '900'
+                elements[i].style.textShadow = 'none'
+                elements[i].style.fontFamily = 'Josefin'
+                elements[i].style.cursor = 'auto'
+                elements[i].style.animation = 'none'
+            }
+            for (let i = 0; i < elements.length; i++) {
+                if (elements[i].innerHTML == '0') {
+                    paintZero(i)
+                } else {
+                    paintLetter(i)
                 }
             }
             let matrix = document.querySelector('#matrix')
@@ -45,14 +65,17 @@
                             }, 1000)
                         }
                     }, 2000)
-                    let newMatrix = 'I0000am000AhmedRakinKamal'
+                    let newMatrix = 'I00000am00AhmedRakinKamal'
                     for (let i = 0; i < 25; i++) {
                         setTimeout(() => {
                             elements[i].innerHTML = newMatrix[i]
                             if (newMatrix[i] == '0') {
-                                elements[i].style.fontWeight = '200'
+                                paintZero(i)
                             } else {
-                                elements[i].style.fontWeight = '900'
+                                paintLetter(i)
+                                if (i < 10) {
+                                    elements[i].style.fontFamily = 'Tangerine'
+                                }
                             }
                         }, Math.random() * 2000)
                     }
@@ -80,9 +103,9 @@
                         setTimeout(() => {
                             elements[i].innerHTML = newMatrix[i]
                             if (newMatrix[i] == '0') {
-                                elements[i].style.fontWeight = '200'
+                                paintZero(i)
                             } else {
-                                elements[i].style.fontWeight = '900'
+                                paintLetter(i)
                             }
                         }, Math.random() * 2000)
                     }
@@ -115,14 +138,18 @@
                         })
 
                     }, 2000)
-                    let newMatrix = '00000T000Sh00WiiimeTssybe'
+                    let newMatrix = 'T0mWSh0yeiii0btss00eENTER'
                     for (let i = 0; i < 25; i++) {
                         setTimeout(() => {
                             elements[i].innerHTML = newMatrix[i]
                             if (newMatrix[i] == '0') {
-                                elements[i].style.fontWeight = '200'
+                                paintZero(i)
                             } else {
-                                elements[i].style.fontWeight = '900'
+                                paintLetter(i)
+                                if (i >= 20) {
+                                    elements[i].style.animation = 'clickme 4s infinite'
+                                    elements[i].style.cursor = 'pointer'
+                                }
                             }
                         }, Math.random() * 2000)
                     }
@@ -138,12 +165,6 @@
                         operatorA.style.cursor = 'pointer'
                         operatorA.style.opacity = '1'
                         operatorB.style.animation = 'appear 1s'
-                        setTimeout(() => {
-
-                            if (elements[12].style.cursor != 'pointer') {
-                                operatorB.style.animation = 'clickme 4s infinite'
-                            }
-                        }, 1000)
                     }, 2000)
                     let newMatrix = 'I0000am000AhmedRakinKamal'
                     for (let i = 0; i < 25; i++) {
@@ -152,9 +173,9 @@
                             operatorB.canClick = true
                             elements[i].innerHTML = newMatrix[i]
                             if (newMatrix[i] == '0') {
-                                elements[i].style.fontWeight = '200'
+                                paintZero(i)
                             } else {
-                                elements[i].style.fontWeight = '900'
+                                paintLetter(i)
                             }
                         }, Math.random() * 2000)
                     }

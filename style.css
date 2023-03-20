@@ -19,8 +19,9 @@ body {
     grid-template-columns: 3rem 3rem 3rem 3rem 3rem;
     grid-template-rows: 3rem 3rem 3rem 3rem 3rem;
     font-weight: 900;
-    font-size: xx-large;
+    font-size: 2rem;
     align-items: center;
+    font-family: Tangerine;
 }
 
 .operate {
@@ -120,16 +121,11 @@ body {
 }
 
 @font-face {
-    font-family: BadScript;
-    src: url('./fonts/BadScript-Regular.ttf');
+    font-family: Tangerine;
+    src: url('./fonts/Tangerine-Regular.ttf');
 }
 
 @font-face {
     font-family: NothingYouCanDo;
     src: url('./fonts/NothingYouCouldDo-Regular.ttf');
-}
-
-@font-face {
-    font-family: IndieFlower;
-    src: url('./fonts/IndieFlower-Regular.ttf');
 }
