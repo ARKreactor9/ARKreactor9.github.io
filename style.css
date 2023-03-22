@@ -4,118 +4,75 @@
 }
 
 body {
-    height: 100vh;
-    width: 100vw;
     background-size: cover;
     background-position: center;
-    font-family: BadScript;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100vw;
+    height: 100vh;
 }
 
-#matrix {
-    display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
-    grid-template-rows: 20% 20% 20% 20% 20%;
-    -ms-grid-row-align: center;
-    -ms-grid-column-align: center;
-    font-weight: 900;
-    align-items: center;
-    font-family: Tangerine;
-    text-align: center;
-}
-
-.element {
-    color: white;
-    display: inline-grid;
-    text-align: center;
-    width: 3rem;
-    height: 3rem;
-    font-size: 2rem;
-    line-height: 3rem;
-}
-
-.operate {
-    color: white;
-    font-size: xx-large;
-    font-weight: 900;
-    animation: clickme 4s infinite;
-    user-select: none;
-    margin: 1rem;
-}
-
-.operate:first-child {
-    transform-origin: right;
-    opacity: 0;
-}
-
-.operate:last-child {
-    transform-origin: left;
-    cursor: pointer;
-}
-
-.operator {
-    font-family: NothingYouCanDo;
-}
-
-@keyframes clickme {
-    0% {
-        scale: 1;
-    }
-    25% {
-        scale: 1.4142;
-    }
-    100% {
-        scale: 1;
-    }
-}
-
-@keyframes appear {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes disappear {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-
-@media (orientation: portrait) and (min-width: 721px) {
+/* between tall and square */
+@media (orientation: portrait) and (max-height: 1.76vw) and (min-width: 721px) {
     body {
         background-image: url('./images/BGSR-1060.png')
     }
 }
-@media (orientation: portrait) and (max-width: 720px) and (min-width: 481px) {
+@media (orientation: portrait) and (max-height: 1.76vw) and (max-width: 720px) and (min-width: 481px) {
     body {
         background-image: url('./images/BGSR-720.png')
     }
 }
-@media (orientation: portrait) and (max-width: 480px) {
+@media (orientation: portrait) and (max-height: 1.76vw) and (max-width: 480px) {
     body {
         background-image: url('./images/BGSR-480.png')
     }
 }
 
-@media (orientation: landscape) and (min-height: 721px) {
+/* most tall */
+@media (orientation: portrait) and (min-height: 1.76vw) and (min-height: 1266px) {
+    body {
+        background-image: url('./images/BGSR-1060.png')
+    }
+}
+@media (orientation: portrait) and (min-height: 1.76vw) and (max-height: 1265) and (min-height: 845px) {
+    body {
+        background-image: url('./images/BGSR-720.png')
+    }
+}
+@media (orientation: portrait) and (min-height: 1.76vw) and (max-height: 844px) {
+    body {
+        background-image: url('./images/BGSR-480.png')
+    }
+}
+
+/* between wide and square */
+@media (orientation: landscape) and (min-height: 1.76vw) and (min-height: 721px) {
     body {
         background-image: url('./images/BGS-1060.png')
     }
 }
-@media (orientation: landscape) and (max-height: 720px) and (min-height: 481px) {
+@media (orientation: landscape) and (min-height: 1.76vw) and (max-height: 720px) and (min-height: 481px) {
     body {
         background-image: url('./images/BGS-720.png')
     }
 }
-@media (orientation: landscape) and (max-height: 480px) {
+@media (orientation: landscape) and (min-height: 1.76vw) and (max-height: 480px) {
+    body {
+        background-image: url('./images/BGS-480.png')
+    }
+}
+
+/* most wide */
+@media (orientation: landscape) and (max-height: 1.76vw) and (min-width: 1266px) {
+    body {
+        background-image: url('./images/BGS-1060.png')
+    }
+}
+@media (orientation: landscape) and (max-height: 1.76vw) and (max-width: 1265) and (min-width: 845px) {
+    body {
+        background-image: url('./images/BGS-720.png')
+    }
+}
+@media (orientation: landscape) and (max-height: 1.76vw) and (max-width: 844px) {
     body {
         background-image: url('./images/BGS-480.png')
     }
