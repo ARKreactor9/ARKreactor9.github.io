@@ -14,9 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.push(document.createElement('p'))
         matrix.appendChild(elements[i])
     }
+    const animationDuration = 1000; // in milliseconds
     function writeMatrix(message) {
         for (let i = 0; i < 25; i++) {
-            elements[i].innerHTML = message[i]
+            setTimeout(() => {
+                elements[i].innerHTML = message[i]
+            }, Math.random() * animationDuration)
         }
     }
     let message = helloMatrix
@@ -33,14 +36,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (message == helloMatrix) {
             message = introduceMatrix
             writeMatrix(message)
-            operatorAsymbol.innerHTML = 'B'
             operatorBsymbol.innerHTML = 'MA<sup>-1</sup>M<sup>-1</sup>'
             appearOperator(operatorB)
+            disappearOperator(operatorA)
+            setTimeout(() => {
+                operatorAsymbol.innerHTML = 'B'
+                appearOperator(operatorA)
+            }, animationDuration)
         } else if (message == introduceMatrix) {
             message = enterMatrix
             writeMatrix(message)
-            operatorBsymbol.innerHTML = 'MAB<sup>-1</sup>A<sup>-1</sup>M<sup>-1</sup>'
             disappearOperator(operatorA)
+            disappearOperator(operatorB)
+            setTimeout(() => {
+                operatorBsymbol.innerHTML = 'MAB<sup>-1</sup>A<sup>-1</sup>M<sup>-1</sup>'
+                appearOperator(operatorB)
+            }, animationDuration)
         }
     })
     operatorB.addEventListener('click', () => {
@@ -49,13 +60,21 @@ document.addEventListener('DOMContentLoaded', () => {
             message = introduceMatrix
             writeMatrix(message)
             operatorAsymbol.innerHTML = 'B'
-            operatorBsymbol.innerHTML = 'MA<sup>-1</sup>M<sup>-1</sup>'
             appearOperator(operatorA)
+            disappearOperator(operatorB)
+            setTimeout(() => {
+                operatorBsymbol.innerHTML = 'MA<sup>-1</sup>M<sup>-1</sup>'
+                appearOperator(operatorB)
+            }, animationDuration)
         } else if (message == introduceMatrix) {
             message = helloMatrix
             writeMatrix(message)
-            operatorAsymbol.innerHTML = 'A'
             disappearOperator(operatorB)
+            disappearOperator(operatorA)
+            setTimeout(() => {
+                operatorAsymbol.innerHTML = 'A'
+                appearOperator(operatorA)
+            }, animationDuration)
         }
     })
 })
