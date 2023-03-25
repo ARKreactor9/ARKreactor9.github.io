@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let colors = ['#0678ff', '#ff1f1d', '#ff2a00', '#00f6ff', '#27b920', '#f61f9f']
     const helloMatrix = 'H58714E52988L20081L39177O'
     const introduceMatrix = 'I00017am76AhmedRakinKamal'
-    const enterMatrix = 'T9mWSh8yeiii0btss81eENTER'
+    const enterMatrix = 'T9m1Sh8yWiii0etss8beENTER'
     let matrix = document.querySelector('#matrix')
     let elements = []
     for (let i = 0; i < 25; i++) {
@@ -17,9 +17,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const animationDuration = 1000; // in milliseconds
     function writeMatrix(message) {
         for (let i = 0; i < 25; i++) {
+            let delay = Math.random() * animationDuration
             setTimeout(() => {
                 elements[i].innerHTML = message[i]
-            }, Math.random() * animationDuration)
+                if (message[i].match(/\d/)) {
+                    elements[i].style.setProperty('--color', colors[parseInt(Math.random() * colors.length)])
+                    elements[i].classList.add('matrix-number')
+                } else {
+                    elements[i].classList.remove('matrix-number')
+                }
+                if (i >= 20 && message[i].match(/[ENTER]/)) {
+                    elements[i].style.setProperty('--delay', `${1000 - delay}ms`)
+                    elements[i].classList.add('enter')
+                } else {
+                    elements[i].classList.remove('enter')
+                }
+                // if (i >= 10 && message[i].match(/[AhmedRakinKamal]/)) {
+                //     elements[i].classList.add('name')
+                // } else {
+                //     elements[i].classList.remove('name')
+                // }
+            }, delay)
         }
     }
     let message = helloMatrix
