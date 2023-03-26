@@ -3,112 +3,328 @@
     padding: 0;
 }
 
+/* Welcome Screen */
+
 body {
-    height: 100vh;
-    width: 100vw;
     background-size: cover;
     background-position: center;
-    font-family: BadScript;
+    width: 100vw;
+    height: 100vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
+    --matrix-element-width: 2rem;
+}
+
+#matrix, .operate, .hidden-operate {
+    color: white;
 }
 
 #matrix {
     display: grid;
-    grid-template-columns: 3rem 3rem 3rem 3rem 3rem;
-    grid-template-rows: 3rem 3rem 3rem 3rem 3rem;
-    font-weight: 900;
-    font-size: xx-large;
-    align-items: center;
+    grid-template-rows: var(--matrix-element-width) var(--matrix-element-width) var(--matrix-element-width) var(--matrix-element-width) var(--matrix-element-width);
+    grid-template-columns: var(--matrix-element-width) var(--matrix-element-width) var(--matrix-element-width) var(--matrix-element-width) var(--matrix-element-width);
+    font-size: var(--matrix-element-width);
+    text-align: center;
+    font-family: Josefin;
+}
+
+.matrix-number {
+    vertical-align: top;
+    font-weight: 100;
+    --color: white;
+    color: var(--color)
 }
 
 .operate {
-    color: white;
-    font-size: xx-large;
-    font-weight: 900;
-    animation: clickme 4s infinite;
     user-select: none;
-    margin: 1rem;
-}
-
-.operate:first-child {
-    transform-origin: right;
-    opacity: 0;
-}
-
-.operate:last-child {
-    transform-origin: left;
     cursor: pointer;
-}
-
-.operator {
+    opacity: 1;
+    animation: appear 1s;
     font-family: NothingYouCanDo;
 }
 
-@keyframes clickme {
-    0% {
-        scale: 1;
-    }
-    25% {
-        scale: 1.4142;
-    }
-    100% {
-        scale: 1;
-    }
+.hidden-operate {
+    user-select: none;
+    cursor: auto;
+    opacity: 0;
+    animation: disappear 1s;
+    font-family: NothingYouCanDo;
+}
+
+#operator-back, #operator-ahead {
+    position: absolute;
+    bottom: calc(50vh - (var(--matrix-element-width) * 0.5));
+    font-size: var(--matrix-element-width);
+}
+
+#operator-back {
+    right: calc(50% + (var(--matrix-element-width) * 2.5));
+    text-align: right;
+}
+
+#operator-ahead {
+    left: calc(50% + (var(--matrix-element-width) * 2.5));
+    text-align: left;
+    /* animation: pop 4s 1.5s infinite; */
+}
+
+.operate#operator-ahead {
+    animation: appear 1s, pop 4s 1s infinite;
+}
+
+.hidden-operate#operator-ahead {
+    animation: disappear 1s, pop 4s 1s infinite;
+}
+
+.name {
+    font-family: Tangerine;
+}
+
+.enter {
+    animation: pop 4s var(--delay) infinite;
+    cursor: pointer;
+    font-weight: 900;
+    font-size: 1rem;
+    padding-top: 0.3rem;
+    padding-left: 0.2rem;
+    border-left: 0.1rem solid white;
+    border-top: 0.1rem solid white;
+    border-radius: 25%;
+    background-color: black;
+}
+
+#skip {
+    width: 100%;
+    text-align: center;
+    color: white;
+    text-decoration: underline;
+    font-family: Josefin;
+    position: absolute;
+    bottom: 0;
+}
+
+#skip:hover {
+    color: antiquewhite;
+}
+
+/* Blinds */
+
+.blinds {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 20vh 20vh 20vh 20vh 20vh;
+    display: none;
+    z-index: 10;
+}
+
+.blinds * {
+    width: 20vw;
+    height: 20vh;
+}
+
+.closed-blind {
+    animation: appear 1s;
+    background-color: antiquewhite;
+}
+
+.open-blind {
+    animation: disappear 1s;
+    background-color: antiquewhite;
+}
+
+.appear {
+    display: block;
+    animation: appear 1s;
+}
+
+.disappear {
+    animation: disappear 1s;
+}
+
+/* Nav Links */
+
+nav {
+    position: fixed;
+    color: white;
+}
+
+#back-navs {
+    left: 0;
+    top: 0;
+    text-align: left;
+}
+
+#back-navs a {
+    transition-duration: 1s;
+    display: block;
+    color: white;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-family: NothingYouCanDo;
+    margin-left: 1rem;
+}
+
+#back-navs a::before {
+    content: '';
+    left: 0.5rem;
+    width: 1px;
+    height: 0;
+    background-color: white;
+    display: block;
+    position: absolute;
+}
+
+#back-navs a:hover::before {
+    content: '';
+    width: 1px;
+    background-color: white;
+    transition: 1s;
+}
+
+#back-navs a:nth-child(1):hover::before {
+    top: 0.5rem;
+    height: 6rem;
+}
+
+#back-navs a:nth-child(2):hover::before {
+    top: 2.5rem;
+    height: 4rem;
+}
+
+#back-navs a:nth-child(3):hover::before {
+    top: 4.5rem;
+    height: 2rem;
+}
+
+
+
+/* Sections */
+
+section {
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: none;
+    position: absolute;
+    display: none;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 20vh 20vh 20vh 20vh 20vh;
+}
+
+/* About Me */
+
+#about {
+}
+
+#about h1:first-of-type {
+}
+
+#about h1 {
 }
 
 @keyframes appear {
     0% {
         opacity: 0;
+        display: block;
     }
     100% {
         opacity: 1;
+        display: block;
     }
 }
 
 @keyframes disappear {
     0% {
         opacity: 1;
+        display: block;
     }
     100% {
         opacity: 0;
+        display: block;
     }
 }
 
-.element {
-    color: white;
-    display: inline-grid;
-    padding: 10px 20px;
+@keyframes pop {
+    0% {
+        scale: 1;
+    }
+    5% {
+        scale: 1.5;;
+    }
+    10% {
+        scale: 1;
+    }
 }
 
-@media (orientation: portrait) and (min-width: 721px) {
+/* between tall and square */
+@media (orientation: portrait) and (max-height: 1.76vw) and (min-width: 721px) {
     body {
         background-image: url('./images/BGSR-1060.png')
     }
 }
-@media (orientation: portrait) and (max-width: 720px) and (min-width: 481px) {
+@media (orientation: portrait) and (max-height: 1.76vw) and (max-width: 720px) and (min-width: 481px) {
     body {
         background-image: url('./images/BGSR-720.png')
     }
 }
-@media (orientation: portrait) and (max-width: 480px) {
+@media (orientation: portrait) and (max-height: 1.76vw) and (max-width: 480px) {
     body {
         background-image: url('./images/BGSR-480.png')
     }
 }
 
-@media (orientation: landscape) and (min-height: 721px) {
+/* most tall */
+@media (orientation: portrait) and (min-height: 1.76vw) and (min-height: 1266px) {
+    body {
+        background-image: url('./images/BGSR-1060.png')
+    }
+}
+@media (orientation: portrait) and (min-height: 1.76vw) and (max-height: 1265) and (min-height: 845px) {
+    body {
+        background-image: url('./images/BGSR-720.png')
+    }
+}
+@media (orientation: portrait) and (min-height: 1.76vw) and (max-height: 844px) {
+    body {
+        background-image: url('./images/BGSR-480.png')
+    }
+}
+
+/* between wide and square */
+@media (orientation: landscape) and (min-height: 1.76vw) and (min-height: 721px) {
     body {
         background-image: url('./images/BGS-1060.png')
     }
 }
-@media (orientation: landscape) and (max-height: 720px) and (min-height: 481px) {
+@media (orientation: landscape) and (min-height: 1.76vw) and (max-height: 720px) and (min-height: 481px) {
     body {
         background-image: url('./images/BGS-720.png')
     }
 }
-@media (orientation: landscape) and (max-height: 480px) {
+@media (orientation: landscape) and (min-height: 1.76vw) and (max-height: 480px) {
+    body {
+        background-image: url('./images/BGS-480.png')
+    }
+}
+
+/* most wide */
+@media (orientation: landscape) and (max-height: 1.76vw) and (min-width: 1266px) {
+    body {
+        background-image: url('./images/BGS-1060.png')
+    }
+}
+@media (orientation: landscape) and (max-height: 1.76vw) and (max-width: 1265) and (min-width: 845px) {
+    body {
+        background-image: url('./images/BGS-720.png')
+    }
+}
+@media (orientation: landscape) and (max-height: 1.76vw) and (max-width: 844px) {
     body {
         background-image: url('./images/BGS-480.png')
     }
@@ -120,16 +336,11 @@ body {
 }
 
 @font-face {
-    font-family: BadScript;
-    src: url('./fonts/BadScript-Regular.ttf');
+    font-family: Tangerine;
+    src: url('./fonts/Tangerine-Regular.ttf');
 }
 
 @font-face {
     font-family: NothingYouCanDo;
     src: url('./fonts/NothingYouCouldDo-Regular.ttf');
-}
-
-@font-face {
-    font-family: IndieFlower;
-    src: url('./fonts/IndieFlower-Regular.ttf');
 }
