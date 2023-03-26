@@ -3,6 +3,8 @@
     padding: 0;
 }
 
+/* Welcome screen */
+
 body {
     background-size: cover;
     background-position: center;
@@ -54,7 +56,7 @@ body {
 
 #operator-back, #operator-ahead {
     position: absolute;
-    top: calc(50vh - (var(--matrix-element-width) * 0.5));
+    bottom: calc(50vh - (var(--matrix-element-width) * 0.5));
     font-size: var(--matrix-element-width);
 }
 
@@ -66,7 +68,15 @@ body {
 #operator-ahead {
     left: calc(50% + (var(--matrix-element-width) * 2.5));
     text-align: left;
-    animation: pop 4s 1.5s infinite;
+    /* animation: pop 4s 1.5s infinite; */
+}
+
+.operate#operator-ahead {
+    animation: appear 1s, pop 4s 1s infinite;
+}
+
+.hidden-operate#operator-ahead {
+    animation: disappear 1s, pop 4s 1s infinite;
 }
 
 .name {
@@ -81,26 +91,80 @@ body {
     padding-top: 0.3rem;
     padding-left: 0.2rem;
     border-left: 0.1rem solid white;
-    border-bottom: 0.1rem solid white;
+    border-top: 0.1rem solid white;
     border-radius: 25%;
     background-color: black;
+}
+
+#skip {
+    width: 100%;
+    text-align: center;
+    color: white;
+    text-decoration: underline;
+    font-family: Josefin;
+    position: absolute;
+    bottom: 0;
+}
+
+#skip:hover {
+    color: antiquewhite;
+}
+
+/* Transition */
+
+.blinds {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 20vh 20vh 20vh 20vh 20vh;
+    display: none;
+}
+
+.blinds * {
+    width: 20vw;
+    height: 20vh;
+}
+
+.closed-blind {
+    animation: appear 1s;
+    background-color: antiquewhite;
+}
+
+.open-blind {
+    animation: disappear 1s;
+}
+
+.appear {
+    display: block;
+    animation: appear 1s;
+}
+
+.disappear {
+    display: none;
+    animation: disappear 1s;
 }
 
 @keyframes appear {
     0% {
         opacity: 0;
+        display: block;
     }
     100% {
         opacity: 1;
+        display: block;
     }
 }
 
 @keyframes disappear {
     0% {
         opacity: 1;
+        display: block;
     }
     100% {
         opacity: 0;
+        display: block;
     }
 }
 

@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let colors = ['#0678ff', '#ff1f1d', '#ff2a00', '#00f6ff', '#27b920', '#f61f9f']
     const helloMatrix = 'H58714E52988L20081L39177O'
     const introduceMatrix = 'I00017am76AhmedRakinKamal'
-    const enterMatrix = 'T9m1Sh8yWiii0etss8beENTER'
+    const enterMatrix = 'ThisEis91N80myTWeb8ESiteR'
+    // const enterMatrix = 'T9m1Sh8yWiii0etss8beENTER'
     let matrix = document.querySelector('#matrix')
     let elements = []
     for (let i = 0; i < 25; i++) {
@@ -26,11 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     elements[i].classList.remove('matrix-number')
                 }
-                if (i >= 20 && message[i].match(/[ENTER]/)) {
+                if (i % 5 == 4 && message[i].match(/[ENTER]/)) {
                     elements[i].style.setProperty('--delay', `${1000 - delay}ms`)
                     elements[i].classList.add('enter')
+                    elements[i].addEventListener('click', enter)
                 } else {
                     elements[i].classList.remove('enter')
+                    elements[i].removeEventListener('click', enter)
                 }
                 // if (i >= 10 && message[i].match(/[AhmedRakinKamal]/)) {
                 //     elements[i].classList.add('name')
@@ -95,4 +98,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }, animationDuration)
         }
     })
+
+    let blindsContainer = document.querySelector('.blinds')
+    for (let i = 0; i < 25; i++) {
+        blindsContainer.appendChild(document.createElement('div'))
+    }
+    let blinds = blindsContainer.querySelectorAll('*')
+    function enter() {
+        blindsContainer.style.display = 'grid'
+        for (let i = 0; i < 25; i++) {
+            let delay = Math.random() * 1000
+            setTimeout(() => {
+                blinds[i].classList.add('closed-blind')
+            }, delay)
+        }
+    }
+    document.querySelector('#skip').addEventListener('click', enter)
 })
