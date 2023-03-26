@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-/* Welcome screen */
+/* Welcome Screen */
 
 body {
     background-size: cover;
@@ -110,7 +110,7 @@ body {
     color: antiquewhite;
 }
 
-/* Transition */
+/* Blinds */
 
 .blinds {
     position: fixed;
@@ -120,6 +120,7 @@ body {
     grid-template-columns: 20% 20% 20% 20% 20%;
     grid-template-rows: 20vh 20vh 20vh 20vh 20vh;
     display: none;
+    z-index: 10;
 }
 
 .blinds * {
@@ -134,6 +135,7 @@ body {
 
 .open-blind {
     animation: disappear 1s;
+    background-color: antiquewhite;
 }
 
 .appear {
@@ -142,8 +144,88 @@ body {
 }
 
 .disappear {
-    display: none;
     animation: disappear 1s;
+}
+
+/* Nav Links */
+
+nav {
+    position: fixed;
+    color: white;
+}
+
+#back-navs {
+    left: 0;
+    top: 0;
+    text-align: left;
+}
+
+#back-navs a {
+    transition-duration: 1s;
+    display: block;
+    color: white;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-family: NothingYouCanDo;
+    margin-left: 1rem;
+}
+
+#back-navs a::before {
+    content: '';
+    left: 0.5rem;
+    width: 1px;
+    height: 0;
+    background-color: white;
+    display: block;
+    position: absolute;
+}
+
+#back-navs a:hover::before {
+    content: '';
+    width: 1px;
+    background-color: white;
+    transition: 1s;
+}
+
+#back-navs a:nth-child(1):hover::before {
+    top: 0.5rem;
+    height: 6rem;
+}
+
+#back-navs a:nth-child(2):hover::before {
+    top: 2.5rem;
+    height: 4rem;
+}
+
+#back-navs a:nth-child(3):hover::before {
+    top: 4.5rem;
+    height: 2rem;
+}
+
+
+
+/* Sections */
+
+section {
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: none;
+    position: absolute;
+    display: none;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 20vh 20vh 20vh 20vh 20vh;
+}
+
+/* About Me */
+
+#about {
+}
+
+#about h1:first-of-type {
+}
+
+#about h1 {
 }
 
 @keyframes appear {

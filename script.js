@@ -104,14 +104,33 @@ document.addEventListener('DOMContentLoaded', () => {
         blindsContainer.appendChild(document.createElement('div'))
     }
     let blinds = blindsContainer.querySelectorAll('*')
+
+    let sections = document.querySelectorAll('section')
+    let [about, education, work, contact] = sections
+
     function enter() {
         blindsContainer.style.display = 'grid'
         for (let i = 0; i < 25; i++) {
-            let delay = Math.random() * 1000
+            blinds[i].delay = Math.random() * 1000
             setTimeout(() => {
                 blinds[i].classList.add('closed-blind')
-            }, delay)
+            }, blinds[i].delay)
         }
+        setTimeout(() => {
+            about.style.display = 'grid'
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    blinds[i].classList.remove('closed-blind')
+                    blinds[i].classList.add('open-blind')
+                    setTimeout(() => {
+                        blinds[i].classList.remove('open-blind')
+                    }, 999)
+                }, blinds[i].delay)
+            }
+            setTimeout(() => {
+                blindsContainer.style.display = 'none'
+            }, 2000)
+        }, 2000)
     }
     document.querySelector('#skip').addEventListener('click', enter)
 })
